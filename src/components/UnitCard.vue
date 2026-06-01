@@ -8,7 +8,7 @@ defineProps<{
 const raceColour = (race: Unit['race']) => {
   const colours: Record<Unit['race'], string> = {
     Human: '#4a90d9',
-    Orc: '#e8a020',
+    Orc: '#e8253a',
     Undead: '#9b59b6',
     'Night Elf': '#2ecc71',
     Neutral: '#888888',

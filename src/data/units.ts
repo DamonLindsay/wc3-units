@@ -53,7 +53,7 @@ export const units: Unit[] = [
     damage: '17-19',
     armor: 0,
     cost: { gold: 145, lumber: 20 },
-    description: 'Troll warriors who hurl throwing axes at their enemies.',
+    description: 'Troll warriors who hurl throwing spears at their enemies.',
   },
   {
     id: 'ghoul',
