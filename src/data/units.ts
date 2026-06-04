@@ -13,6 +13,7 @@ export interface Unit {
   weaknesses: string[]
   isHero: boolean
   icon: string
+  quotes: string[]
 }
 
 export const units: Unit[] = [
@@ -32,6 +33,7 @@ export const units: Unit[] = [
     weaknesses: ['Low damage output', 'Slow movement speed', 'Outclassed late game'],
     isHero: false,
     icon: 'https://warcraft.wiki.gg/images/BTNFootman.png',
+    quotes: ['Ready for action.'],
   },
   {
     id: 'rifleman',
@@ -48,6 +50,7 @@ export const units: Unit[] = [
     weaknesses: ['No armour', 'Expensive', 'Vulnerable to casters'],
     isHero: false,
     icon: 'https://warcraft.wiki.gg/images/BTNRifleman.png',
+    quotes: ['Locked and loaded.'],
   },
   {
     id: 'knight',
@@ -64,6 +67,7 @@ export const units: Unit[] = [
     weaknesses: ['Expensive', 'Requires tier 3', 'No ranged capability'],
     isHero: false,
     icon: 'https://warcraft.wiki.gg/images/BTNKnight.png',
+    quotes: ['I await your command.'],
   },
   {
     id: 'archmage',
@@ -81,6 +85,7 @@ export const units: Unit[] = [
     weaknesses: ['Fragile for a hero', 'Mana dependent', 'Slow attack'],
     isHero: true,
     icon: 'https://warcraft.wiki.gg/images/BTNHeroArchMage.png',
+    quotes: ['This had better be worth it!'],
   },
   {
     id: 'mountain-king',
@@ -97,6 +102,7 @@ export const units: Unit[] = [
     weaknesses: ['Melee only', 'Slow move speed', 'Needs positioning'],
     isHero: true,
     icon: 'https://warcraft.wiki.gg/images/BTNHeroMountainKing.png',
+    quotes: ['All right, who wants some?'],
   },
 
   // ─── ORC ─────────────────────────────────────────────────
@@ -115,6 +121,7 @@ export const units: Unit[] = [
     weaknesses: ['No special abilities', 'Expensive for tier 1', 'Slow'],
     isHero: false,
     icon: 'https://warcraft.wiki.gg/images/BTNGrunt.png',
+    quotes: ['My life for the Horde!'],
   },
   {
     id: 'headhunter',
@@ -131,6 +138,7 @@ export const units: Unit[] = [
     weaknesses: ['Low armour', 'Fragile without upgrades', 'Short range'],
     isHero: false,
     icon: 'https://warcraft.wiki.gg/images/BTNHeadhunter.png',
+    quotes: ['Vengeance for Zul!'],
   },
   {
     id: 'tauren',
@@ -147,6 +155,7 @@ export const units: Unit[] = [
     weaknesses: ['Very expensive', 'Slow', 'Requires tier 3'],
     isHero: false,
     icon: 'https://warcraft.wiki.gg/images/BTNTauren.png',
+    quotes: ['May my ancestors watch over me.'],
   },
   {
     id: 'far-seer',
@@ -167,6 +176,7 @@ export const units: Unit[] = [
     weaknesses: ['Fragile', 'Mana dependent', 'Weaker in direct combat'],
     isHero: true,
     icon: 'https://warcraft.wiki.gg/images/BTNHeroFarseer.png',
+    quotes: ['The future is ours.'],
   },
   {
     id: 'blademaster',
@@ -183,6 +193,7 @@ export const units: Unit[] = [
     weaknesses: ['Relatively low HP for melee hero', 'Micromanagement heavy', 'No AoE nuke'],
     isHero: true,
     icon: 'https://warcraft.wiki.gg/images/BTNHeroBlademaster.png',
+    quotes: ['My blade seeks vengeance.'],
   },
 
   // ─── UNDEAD ──────────────────────────────────────────────
@@ -201,6 +212,7 @@ export const units: Unit[] = [
     weaknesses: ['Very low HP', 'No armour', 'Weak late game'],
     isHero: false,
     icon: 'https://warcraft.wiki.gg/images/BTNGhoul.png',
+    quotes: ['Wuzzap.', 'Must feed!'],
   },
   {
     id: 'crypt-fiend',
@@ -217,6 +229,7 @@ export const units: Unit[] = [
     weaknesses: ['Expensive', 'Slow attack speed', 'Vulnerable to AoE'],
     isHero: false,
     icon: 'https://warcraft.wiki.gg/images/BTNCryptFiend.png',
+    quotes: ['The sleeper awakes.'],
   },
   {
     id: 'abomination',
@@ -233,6 +246,7 @@ export const units: Unit[] = [
     weaknesses: ['Slow movement', 'No ranged attack', 'Expensive'],
     isHero: false,
     icon: 'https://warcraft.wiki.gg/images/BTNAbomination.png',
+    quotes: ['Us hear and obey.'],
   },
   {
     id: 'lich',
@@ -249,6 +263,7 @@ export const units: Unit[] = [
     weaknesses: ['Fragile', 'Slow movement', 'Mana reliant'],
     isHero: true,
     icon: 'https://warcraft.wiki.gg/images/BTNHeroLich.png',
+    quotes: ['The ancient evil survives!'],
   },
   {
     id: 'death-knight',
@@ -269,6 +284,7 @@ export const units: Unit[] = [
     weaknesses: ['Average damage for melee hero', 'Relies on army to be effective', 'No mobility'],
     isHero: true,
     icon: 'https://warcraft.wiki.gg/images/BTNHeroDeathKnight.png',
+    quotes: ['The pact is sealed!'],
   },
 
   // ─── NIGHT ELF ───────────────────────────────────────────
@@ -287,6 +303,7 @@ export const units: Unit[] = [
     weaknesses: ['Very low HP', 'Weak in direct combat', 'Fragile'],
     isHero: false,
     icon: 'https://warcraft.wiki.gg/images/BTNArcher.png',
+    quotes: ['I stand ready.'],
   },
   {
     id: 'huntress',
@@ -303,6 +320,7 @@ export const units: Unit[] = [
     weaknesses: ['Medium HP', 'Lower damage than other tier 2 melee', 'Lumber cost'],
     isHero: false,
     icon: 'https://warcraft.wiki.gg/images/BTNHuntress.png',
+    quotes: ['Goddess, light my path.'],
   },
   {
     id: 'druid-of-the-claw',
@@ -319,6 +337,7 @@ export const units: Unit[] = [
     weaknesses: ['Expensive', 'Caster form is fragile', 'Slow in bear form'],
     isHero: false,
     icon: 'https://warcraft.wiki.gg/images/BTNDruidOfTheClaw.png',
+    quotes: ['The sleeper has awakened.'],
   },
   {
     id: 'demon-hunter',
@@ -339,6 +358,7 @@ export const units: Unit[] = [
     weaknesses: ['Immolation drains mana', 'No hard CC', 'Countered by dispel'],
     isHero: true,
     icon: 'https://warcraft.wiki.gg/images/BTNHeroDemonHunter.png',
+    quotes: ['At last... we shall have revenge...'],
   },
   {
     id: 'keeper-of-the-grove',
@@ -359,5 +379,6 @@ export const units: Unit[] = [
     weaknesses: ['Fragile', 'Slow', 'Tranquility can be interrupted'],
     isHero: true,
     icon: 'https://warcraft.wiki.gg/images/BTNKeeperOfTheGrove.png',
+    quotes: ['I must safeguard the land.'],
   },
 ]

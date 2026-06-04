@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch, onMounted, onUnmounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { units } from '@/data/units'
 import StatCard from '@/components/StatCard.vue'
@@ -24,6 +24,46 @@ const raceColour = (race: string) => {
 const onStatClicked = (label: string, value: string | number) => {
   lastClicked.value = `${label}: ${value}`
 }
+
+// Typewriter effect
+const displayedQuote = ref('')
+const currentQuoteIndex = ref(0)
+let typewriterInterval: ReturnType<typeof setInterval> | null = null
+
+const startTypewriter = (quote: string) => {
+  displayedQuote.value = ''
+  let i = 0
+  if (typewriterInterval) clearInterval(typewriterInterval)
+  typewriterInterval = setInterval(() => {
+    displayedQuote.value += quote[i]
+    i++
+    if (i >= quote.length) clearInterval(typewriterInterval!)
+  }, 50)
+}
+
+const nextQuote = () => {
+  if (!unit.value) return
+  currentQuoteIndex.value = (currentQuoteIndex.value + 1) % unit.value.quotes.length
+  const quote = unit.value.quotes[currentQuoteIndex.value]
+  if (quote) startTypewriter(quote)
+}
+
+onMounted(() => {
+  const quote = unit.value?.quotes[0]
+  if (quote) startTypewriter(quote)
+})
+
+onUnmounted(() => {
+  if (typewriterInterval) clearInterval(typewriterInterval)
+})
+
+watch(unit, (newUnit) => {
+  const quote = newUnit?.quotes[0]
+  if (quote) {
+    currentQuoteIndex.value = 0
+    startTypewriter(quote)
+  }
+})
 </script>
 
 <template>
@@ -68,6 +108,22 @@ const onStatClicked = (label: string, value: string | number) => {
 
       <!-- Description -->
       <p class="text-gray-300 text-sm leading-relaxed mb-8">{{ unit.description }}</p>
+
+      <!-- Unit Quote -->
+      <div
+        class="mb-8 p-4 rounded-lg bg-[#1e1e2e] border border-gray-800 flex items-center justify-between gap-4"
+        :style="{ borderLeftColor: raceColour(unit.race), borderLeftWidth: '3px' }"
+      >
+        <p class="text-sm italic flex-1" :style="{ color: raceColour(unit.race) }">
+          "{{ displayedQuote }}<span class="animate-pulse">|</span>"
+        </p>
+        <button
+          @click="nextQuote"
+          class="text-xs text-gray-500 hover:text-gray-300 cursor-pointer flex-shrink-0 transition-colors"
+        >
+          next ›
+        </button>
+      </div>
 
       <!-- Lore -->
       <div class="mb-8 p-4 rounded-lg bg-[#1a1a2e] border border-gray-800 italic">
