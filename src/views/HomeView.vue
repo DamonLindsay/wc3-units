@@ -20,77 +20,37 @@ const goToUnit = (id: string) => {
 </script>
 
 <template>
-  <div class="app">
-    <header>
-      <h1>⚔️ Warcraft III Unit Encyclopedia</h1>
-      <p>{{ filteredUnits.length }} units found</p>
+  <div class="max-w-3xl mx-auto px-4 py-6">
+    <header class="mb-6">
+      <h1 class="text-2xl font-bold text-white">⚔️ Warcraft III Unit Encyclopedia</h1>
+      <p class="text-sm text-gray-400">{{ filteredUnits.length }} units found</p>
     </header>
 
-    <div class="filters">
+    <div class="flex flex-wrap gap-2 mb-6">
       <button
         v-for="race in races"
         :key="race"
-        :class="{ active: selectedRace === race }"
+        :class="[
+          'px-4 py-1.5 rounded-full text-sm border cursor-pointer',
+          selectedRace === race
+            ? 'bg-blue-500 border-blue-500 text-white'
+            : 'bg-[#1e1e2e] border-gray-600 text-gray-400 hover:border-gray-400',
+        ]"
         @click="selectedRace = race"
       >
         {{ race }}
       </button>
     </div>
 
-    <div class="unit-list">
+    <div class="space-y-3">
       <div
         v-for="unit in filteredUnits"
         :key="unit.id"
         @click="goToUnit(unit.id)"
-        class="clickable"
+        class="cursor-pointer hover:opacity-85 transition-opacity"
       >
         <UnitCard :unit="unit" />
       </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-.app {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 24px 16px;
-}
-header {
-  margin-bottom: 20px;
-}
-h1 {
-  font-size: 24px;
-  margin-bottom: 4px;
-}
-header p {
-  color: #888;
-  font-size: 14px;
-}
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 20px;
-}
-button {
-  padding: 6px 14px;
-  border-radius: 20px;
-  border: 1px solid #444;
-  background: #1e1e2e;
-  color: #ccc;
-  cursor: pointer;
-  font-size: 13px;
-}
-button.active {
-  background: #4a90d9;
-  border-color: #4a90d9;
-  color: #fff;
-}
-.clickable {
-  cursor: pointer;
-}
-.clickable:hover {
-  opacity: 0.85;
-}
-</style>
