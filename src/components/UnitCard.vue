@@ -18,88 +18,47 @@ const raceColour = (race: Unit['race']) => {
 </script>
 
 <template>
-  <div class="unit-card">
-    <div class="race-bar" :style="{ backgroundColor: raceColour(unit.race) }"></div>
-    <div class="unit-body">
-      <div class="unit-header">
-        <h2>{{ unit.name }}</h2>
-        <span class="badge">{{ unit.race }}</span>
+  <div class="flex overflow-hidden rounded-lg bg-[#1e1e2e] border border-gray-800">
+    <div class="w-1.5 flex-shrink-0" :style="{ backgroundColor: raceColour(unit.race) }"></div>
+    <div class="w-14 h-14 flex-shrink-0 m-3">
+      <img
+        :src="unit.icon"
+        :alt="unit.name"
+        class="w-full h-full object-cover rounded"
+        onerror="this.style.display = 'none'"
+      />
+    </div>
+    <div class="flex-1 py-3 pr-3">
+      <div class="flex items-center gap-2 mb-1">
+        <h2 class="text-sm font-bold text-white">{{ unit.name }}</h2>
+        <span class="text-xs px-2 py-0.5 rounded-full bg-[#2a2a3e] text-gray-400">{{
+          unit.race
+        }}</span>
+        <span
+          v-if="unit.isHero"
+          class="text-xs px-2 py-0.5 rounded-full bg-yellow-500 text-black font-bold"
+          >Hero</span
+        >
       </div>
-      <p class="description">{{ unit.description }}</p>
-      <div class="stats">
-        <div class="stat">
-          ❤️ <strong>{{ unit.hp }}</strong> HP
-        </div>
-        <div class="stat">
-          ⚔️ <strong>{{ unit.damage }}</strong> DMG
-        </div>
-        <div class="stat">
-          🛡️ <strong>{{ unit.armor }}</strong> Armour
-        </div>
-        <div class="stat">
-          🪙 <strong>{{ unit.cost.gold }}</strong> Gold
-        </div>
-        <div class="stat">
-          🪵 <strong>{{ unit.cost.lumber }}</strong> Lumber
-        </div>
-        <div class="stat">
-          🗡️ <strong>{{ unit.type }}</strong>
-        </div>
+      <p class="text-xs text-gray-400 mb-2">{{ unit.description }}</p>
+      <div class="flex flex-wrap gap-1.5">
+        <span class="text-xs bg-[#2a2a3e] px-2 py-0.5 rounded text-gray-300">❤️ {{ unit.hp }}</span>
+        <span class="text-xs bg-[#2a2a3e] px-2 py-0.5 rounded text-gray-300"
+          >⚔️ {{ unit.damage }}</span
+        >
+        <span class="text-xs bg-[#2a2a3e] px-2 py-0.5 rounded text-gray-300"
+          >🛡️ {{ unit.armor }}</span
+        >
+        <span class="text-xs bg-[#2a2a3e] px-2 py-0.5 rounded text-gray-300"
+          >🪙 {{ unit.cost.gold }}</span
+        >
+        <span class="text-xs bg-[#2a2a3e] px-2 py-0.5 rounded text-gray-300"
+          >🪵 {{ unit.cost.lumber }}</span
+        >
+        <span class="text-xs bg-[#2a2a3e] px-2 py-0.5 rounded text-gray-300"
+          >🗡️ {{ unit.type }}</span
+        >
       </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-.unit-card {
-  display: flex;
-  border-radius: 8px;
-  overflow: hidden;
-  background: #1e1e2e;
-  border: 1px solid #333;
-  margin-bottom: 12px;
-}
-.race-bar {
-  width: 6px;
-  flex-shrink: 0;
-}
-.unit-body {
-  padding: 14px 16px;
-  flex: 1;
-}
-.unit-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 6px;
-}
-h2 {
-  margin: 0;
-  font-size: 16px;
-  color: #fff;
-}
-.badge {
-  font-size: 11px;
-  padding: 2px 8px;
-  border-radius: 20px;
-  background: #333;
-  color: #ccc;
-}
-.description {
-  font-size: 13px;
-  color: #aaa;
-  margin: 0 0 10px;
-}
-.stats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-.stat {
-  font-size: 13px;
-  color: #ddd;
-  background: #2a2a3e;
-  padding: 4px 10px;
-  border-radius: 4px;
-}
-</style>

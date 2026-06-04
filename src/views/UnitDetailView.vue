@@ -37,22 +37,32 @@ const onStatClicked = (label: string, value: string | number) => {
 
     <div v-if="unit">
       <!-- Header -->
-      <div class="pl-5 mb-6 border-l-4" :style="{ borderColor: raceColour(unit.race) }">
-        <div class="flex items-center gap-3 mb-2">
-          <h1 class="text-3xl font-bold text-white">{{ unit.name }}</h1>
-          <span
-            v-if="unit.isHero"
-            class="text-xs px-3 py-1 rounded-full bg-yellow-500 text-black font-bold"
-            >Hero</span
-          >
-        </div>
-        <div class="flex gap-2">
-          <span class="text-xs px-3 py-1 rounded-full bg-[#2a2a3e] text-gray-400">{{
-            unit.race
-          }}</span>
-          <span class="text-xs px-3 py-1 rounded-full bg-[#2a2a3e] text-gray-400">{{
-            unit.type
-          }}</span>
+      <div
+        class="pl-5 mb-6 border-l-4 flex items-start gap-4"
+        :style="{ borderColor: raceColour(unit.race) }"
+      >
+        <img
+          :src="unit.icon"
+          :alt="unit.name"
+          class="w-16 h-16 rounded-lg border border-gray-700 flex-shrink-0"
+        />
+        <div>
+          <div class="flex items-center gap-3 mb-2">
+            <h1 class="text-3xl font-bold text-white">{{ unit.name }}</h1>
+            <span
+              v-if="unit.isHero"
+              class="text-xs px-3 py-1 rounded-full bg-yellow-500 text-black font-bold"
+              >Hero</span
+            >
+          </div>
+          <div class="flex gap-2">
+            <span class="text-xs px-3 py-1 rounded-full bg-[#2a2a3e] text-gray-400">{{
+              unit.race
+            }}</span>
+            <span class="text-xs px-3 py-1 rounded-full bg-[#2a2a3e] text-gray-400">{{
+              unit.type
+            }}</span>
+          </div>
         </div>
       </div>
 

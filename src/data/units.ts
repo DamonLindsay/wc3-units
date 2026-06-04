@@ -12,6 +12,7 @@ export interface Unit {
   strengths: string[]
   weaknesses: string[]
   isHero: boolean
+  icon: string
 }
 
 export const units: Unit[] = [
@@ -30,6 +31,7 @@ export const units: Unit[] = [
     strengths: ['Low cost', 'High armour for tier 1', 'Defend ability absorbs ranged damage'],
     weaknesses: ['Low damage output', 'Slow movement speed', 'Outclassed late game'],
     isHero: false,
+    icon: 'https://warcraft.wiki.gg/images/BTNFootman.png',
   },
   {
     id: 'rifleman',
@@ -45,6 +47,7 @@ export const units: Unit[] = [
     strengths: ['High ranged damage', 'Can target air units', 'Long attack range'],
     weaknesses: ['No armour', 'Expensive', 'Vulnerable to casters'],
     isHero: false,
+    icon: 'https://warcraft.wiki.gg/images/BTNRifleman.png',
   },
   {
     id: 'knight',
@@ -60,6 +63,7 @@ export const units: Unit[] = [
     strengths: ['Very high HP', 'High armour', 'Strong damage'],
     weaknesses: ['Expensive', 'Requires tier 3', 'No ranged capability'],
     isHero: false,
+    icon: 'https://warcraft.wiki.gg/images/BTNKnight.png',
   },
   {
     id: 'archmage',
@@ -76,6 +80,7 @@ export const units: Unit[] = [
     strengths: ['Blizzard AoE spell', 'Summons Water Elemental', 'Mass Teleport utility'],
     weaknesses: ['Fragile for a hero', 'Mana dependent', 'Slow attack'],
     isHero: true,
+    icon: 'https://warcraft.wiki.gg/images/BTNHeroArchMage.png',
   },
   {
     id: 'mountain-king',
@@ -91,6 +96,7 @@ export const units: Unit[] = [
     strengths: ['Storm Bolt stun', 'Avatar ultimate is incredibly tanky', 'Thunder Clap AoE'],
     weaknesses: ['Melee only', 'Slow move speed', 'Needs positioning'],
     isHero: true,
+    icon: 'https://warcraft.wiki.gg/images/BTNHeroMountainKing.png',
   },
 
   // ─── ORC ─────────────────────────────────────────────────
@@ -108,6 +114,7 @@ export const units: Unit[] = [
     strengths: ['Highest HP of basic melee units', 'Strong damage', 'Simple but effective'],
     weaknesses: ['No special abilities', 'Expensive for tier 1', 'Slow'],
     isHero: false,
+    icon: 'https://warcraft.wiki.gg/images/BTNGrunt.png',
   },
   {
     id: 'headhunter',
@@ -123,6 +130,7 @@ export const units: Unit[] = [
     strengths: ['Cheap ranged unit', 'Can berserker upgrade', 'Forest regeneration'],
     weaknesses: ['Low armour', 'Fragile without upgrades', 'Short range'],
     isHero: false,
+    icon: 'https://warcraft.wiki.gg/images/BTNHeadhunter.png',
   },
   {
     id: 'tauren',
@@ -138,6 +146,7 @@ export const units: Unit[] = [
     strengths: ['Highest HP of any standard unit', 'Massive damage', 'War Stomp AoE'],
     weaknesses: ['Very expensive', 'Slow', 'Requires tier 3'],
     isHero: false,
+    icon: 'https://warcraft.wiki.gg/images/BTNTauren.png',
   },
   {
     id: 'far-seer',
@@ -157,6 +166,7 @@ export const units: Unit[] = [
     ],
     weaknesses: ['Fragile', 'Mana dependent', 'Weaker in direct combat'],
     isHero: true,
+    icon: 'https://warcraft.wiki.gg/images/BTNHeroFarseer.png',
   },
   {
     id: 'blademaster',
@@ -172,6 +182,7 @@ export const units: Unit[] = [
     strengths: ['Wind Walk invisibility', 'Mirror Image confusion', 'Critical Strike'],
     weaknesses: ['Relatively low HP for melee hero', 'Micromanagement heavy', 'No AoE nuke'],
     isHero: true,
+    icon: 'https://warcraft.wiki.gg/images/BTNHeroBlademaster.png',
   },
 
   // ─── UNDEAD ──────────────────────────────────────────────
@@ -189,6 +200,7 @@ export const units: Unit[] = [
     strengths: ['Cheapest melee unit', 'Can harvest lumber', 'Cannibalize ability'],
     weaknesses: ['Very low HP', 'No armour', 'Weak late game'],
     isHero: false,
+    icon: 'https://warcraft.wiki.gg/images/BTNGhoul.png',
   },
   {
     id: 'crypt-fiend',
@@ -204,6 +216,7 @@ export const units: Unit[] = [
     strengths: ['Web ability grounds air units', 'Good damage', 'Decent armour'],
     weaknesses: ['Expensive', 'Slow attack speed', 'Vulnerable to AoE'],
     isHero: false,
+    icon: 'https://warcraft.wiki.gg/images/BTNCryptFiend.png',
   },
   {
     id: 'abomination',
@@ -219,6 +232,7 @@ export const units: Unit[] = [
     strengths: ['High HP', 'Disease Cloud slows enemies', 'Strong melee damage'],
     weaknesses: ['Slow movement', 'No ranged attack', 'Expensive'],
     isHero: false,
+    icon: 'https://warcraft.wiki.gg/images/BTNAbomination.png',
   },
   {
     id: 'lich',
@@ -234,6 +248,7 @@ export const units: Unit[] = [
     strengths: ['Frost Nova AoE slow and damage', 'Frost Armour on allies', 'Dark Ritual sustain'],
     weaknesses: ['Fragile', 'Slow movement', 'Mana reliant'],
     isHero: true,
+    icon: 'https://warcraft.wiki.gg/images/BTNHeroLich.png',
   },
   {
     id: 'death-knight',
@@ -253,6 +268,7 @@ export const units: Unit[] = [
     ],
     weaknesses: ['Average damage for melee hero', 'Relies on army to be effective', 'No mobility'],
     isHero: true,
+    icon: 'https://warcraft.wiki.gg/images/BTNHeroDeathKnight.png',
   },
 
   // ─── NIGHT ELF ───────────────────────────────────────────
@@ -270,6 +286,7 @@ export const units: Unit[] = [
     strengths: ['Night vision and invisibility at night', 'Cheap', 'Upgrade to Sentinel'],
     weaknesses: ['Very low HP', 'Weak in direct combat', 'Fragile'],
     isHero: false,
+    icon: 'https://warcraft.wiki.gg/images/BTNArcher.png',
   },
   {
     id: 'huntress',
@@ -285,6 +302,7 @@ export const units: Unit[] = [
     strengths: ['Fast movement speed', 'Sentinel ability', 'Good harass unit'],
     weaknesses: ['Medium HP', 'Lower damage than other tier 2 melee', 'Lumber cost'],
     isHero: false,
+    icon: 'https://warcraft.wiki.gg/images/BTNHuntress.png',
   },
   {
     id: 'druid-of-the-claw',
@@ -300,6 +318,7 @@ export const units: Unit[] = [
     strengths: ['Bear form is extremely tanky', 'Roar buffs nearby units', 'Versatile'],
     weaknesses: ['Expensive', 'Caster form is fragile', 'Slow in bear form'],
     isHero: false,
+    icon: 'https://warcraft.wiki.gg/images/BTNDruidOfTheClaw.png',
   },
   {
     id: 'demon-hunter',
@@ -319,6 +338,7 @@ export const units: Unit[] = [
     ],
     weaknesses: ['Immolation drains mana', 'No hard CC', 'Countered by dispel'],
     isHero: true,
+    icon: 'https://warcraft.wiki.gg/images/BTNHeroDemonHunter.png',
   },
   {
     id: 'keeper-of-the-grove',
@@ -338,5 +358,6 @@ export const units: Unit[] = [
     ],
     weaknesses: ['Fragile', 'Slow', 'Tranquility can be interrupted'],
     isHero: true,
+    icon: 'https://warcraft.wiki.gg/images/BTNKeeperOfTheGrove.png',
   },
 ]
