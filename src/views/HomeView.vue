@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { units } from '@/data/units'
 import type { Unit } from '@/data/units'
@@ -8,11 +8,19 @@ import UnitCard from '@/components/UnitCard.vue'
 const router = useRouter()
 const selectedRace = ref<Unit['race'] | 'All'>('All')
 const races: Array<Unit['race'] | 'All'> = ['All', 'Human', 'Orc', 'Undead', 'Night Elf', 'Neutral']
+const searchTerm = ref('')
+const searchResults = ref(units)
 
-const filteredUnits = computed(() => {
-  if (selectedRace.value === 'All') return units
-  return units.filter((u) => u.race === selectedRace.value)
+watch([searchTerm, selectedRace], ([newSearch, newRace]) => {
+  searchResults.value = units.filter((unit) => {
+    const matchesRace = newRace === 'All' || unit.race === newRace
+    const matchesSearch = unit.name.toLowerCase().includes(newSearch.toLowerCase())
+    return matchesRace && matchesSearch
+  })
 })
+
+// Keep filteredUnits as the source of truth for the template
+const filteredUnits = computed(() => searchResults.value)
 
 const goToUnit = (id: string) => {
   router.push({ name: 'unit-detail', params: { id } })
@@ -25,6 +33,15 @@ const goToUnit = (id: string) => {
       <h1 class="text-2xl font-bold text-white">⚔️ Warcraft III Unit Encyclopedia</h1>
       <p class="text-sm text-gray-400">{{ filteredUnits.length }} units found</p>
     </header>
+
+    <div class="mb-4">
+      <input
+        v-model="searchTerm"
+        type="text"
+        placeholder="Search units..."
+        class="w-full px-4 py-2 rounded-lg bg-[#1e1e2e] border border-gray-600 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500"
+      />
+    </div>
 
     <div class="flex flex-wrap gap-2 mb-6">
       <button
