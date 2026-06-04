@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { units } from '@/data/units'
+import StatCard from '@/components/StatCard.vue'
 
 const route = useRoute()
 const router = useRouter()
 
 const unit = computed(() => units.find((u) => u.id === route.params.id))
+const lastClicked = ref('')
 
 const goBack = () => router.push({ name: 'home' })
 
@@ -20,6 +22,10 @@ const raceColour = (race: string) => {
   }
   return colours[race] ?? '#888888'
 }
+
+const onStatClicked = (label: string, value: string | number) => {
+  lastClicked.value = `${label}: ${value}`
+}
 </script>
 
 <template>
@@ -30,7 +36,6 @@ const raceColour = (race: string) => {
     >
       ← Back
     </button>
-
     <div v-if="unit">
       <div class="pl-5 mb-8 border-l-4" :style="{ borderColor: raceColour(unit.race) }">
         <h1 class="text-3xl font-bold text-white mb-3">{{ unit.name }}</h1>
@@ -43,34 +48,34 @@ const raceColour = (race: string) => {
           }}</span>
         </div>
       </div>
-
       <p class="text-gray-400 text-sm leading-relaxed mb-10">{{ unit.description }}</p>
-
       <h2 class="text-xs uppercase tracking-widest text-gray-500 mb-4">Stats</h2>
+
       <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
-        <div class="bg-[#1e1e2e] border border-gray-700 rounded-lg p-4">
-          <p class="text-xs text-gray-500 mb-2">❤️ Hit Points</p>
-          <p class="text-2xl font-bold text-white">{{ unit.hp }}</p>
-        </div>
-        <div class="bg-[#1e1e2e] border border-gray-700 rounded-lg p-4">
-          <p class="text-xs text-gray-500 mb-2">⚔️ Damage</p>
-          <p class="text-2xl font-bold text-white">{{ unit.damage }}</p>
-        </div>
-        <div class="bg-[#1e1e2e] border border-gray-700 rounded-lg p-4">
-          <p class="text-xs text-gray-500 mb-2">🛡️ Armour</p>
-          <p class="text-2xl font-bold text-white">{{ unit.armor }}</p>
-        </div>
-        <div class="bg-[#1e1e2e] border border-gray-700 rounded-lg p-4">
-          <p class="text-xs text-gray-500 mb-2">🪙 Gold Cost</p>
-          <p class="text-2xl font-bold text-white">{{ unit.cost.gold }}</p>
-        </div>
-        <div class="bg-[#1e1e2e] border border-gray-700 rounded-lg p-4">
-          <p class="text-xs text-gray-500 mb-2">🪵 Lumber Cost</p>
-          <p class="text-2xl font-bold text-white">{{ unit.cost.lumber }}</p>
-        </div>
+        <StatCard icon="❤️" label="Hit Points" :value="unit.hp" @statClicked="onStatClicked" />
+        <StatCard icon="⚔️" label="Damage" :value="unit.damage" @statClicked="onStatClicked" />
+        <StatCard icon="🛡️" label="Armour" :value="unit.armor" @statClicked="onStatClicked" />
+        <StatCard
+          icon="🪙"
+          label="Gold Cost"
+          :value="unit.cost.gold"
+          @statClicked="onStatClicked"
+        />
+        <StatCard
+          icon="🪵"
+          label="Lumber Cost"
+          :value="unit.cost.lumber"
+          @statClicked="onStatClicked"
+        />
+      </div>
+
+      <div
+        v-if="lastClicked"
+        class="mt-6 p-3 rounded bg-[#1e1e2e] border border-gray-700 text-sm text-gray-400"
+      >
+        Last clicked: <span class="text-white">{{ lastClicked }}</span>
       </div>
     </div>
-
     <div v-else class="text-gray-400">Unit not found.</div>
   </div>
 </template>
