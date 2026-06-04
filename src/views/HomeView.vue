@@ -6,14 +6,23 @@ import type { Unit } from '@/data/units'
 import UnitCard from '@/components/UnitCard.vue'
 
 const router = useRouter()
-const selectedRace = ref<Unit['race'] | 'All'>('All')
-const races: Array<Unit['race'] | 'All'> = ['All', 'Human', 'Orc', 'Undead', 'Night Elf', 'Neutral']
+const selectedRace = ref<Unit['race'] | 'All' | 'Heroes'>('All')
+const races: Array<Unit['race'] | 'All' | 'Heroes'> = [
+  'All',
+  'Heroes',
+  'Human',
+  'Orc',
+  'Undead',
+  'Night Elf',
+  'Neutral',
+]
 const searchTerm = ref('')
 const searchResults = ref(units)
 
 watch([searchTerm, selectedRace], ([newSearch, newRace]) => {
   searchResults.value = units.filter((unit) => {
-    const matchesRace = newRace === 'All' || unit.race === newRace
+    const matchesRace =
+      newRace === 'All' ? true : newRace === 'Heroes' ? unit.isHero : unit.race === newRace
     const matchesSearch = unit.name.toLowerCase().includes(newSearch.toLowerCase())
     return matchesRace && matchesSearch
   })
