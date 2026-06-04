@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, computed, watch, onMounted } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import { units } from '@/data/units'
 import type { Unit } from '@/data/units'
 import UnitCard from '@/components/UnitCard.vue'
 
 const router = useRouter()
+const route = useRoute()
+
 const selectedRace = ref<Unit['race'] | 'All' | 'Heroes'>('All')
 const races: Array<Unit['race'] | 'All' | 'Heroes'> = [
   'All',
@@ -16,8 +18,24 @@ const races: Array<Unit['race'] | 'All' | 'Heroes'> = [
   'Night Elf',
   'Neutral',
 ]
+
+const goBack = () => {
+  router.push({ name: 'race-select' })
+}
+
+watch(selectedRace, (newRace) => {
+  router.replace({ name: 'home', query: { race: newRace } })
+})
+
 const searchTerm = ref('')
 const searchResults = ref(units)
+
+onMounted(() => {
+  const raceQuery = route.query.race as string
+  if (raceQuery && races.includes(raceQuery as Unit['race'])) {
+    selectedRace.value = raceQuery as Unit['race']
+  }
+})
 
 watch([searchTerm, selectedRace], ([newSearch, newRace]) => {
   searchResults.value = units.filter((unit) => {
@@ -28,7 +46,6 @@ watch([searchTerm, selectedRace], ([newSearch, newRace]) => {
   })
 })
 
-// Keep filteredUnits as the source of truth for the template
 const filteredUnits = computed(() => searchResults.value)
 
 const goToUnit = (id: string) => {
@@ -38,6 +55,13 @@ const goToUnit = (id: string) => {
 
 <template>
   <div class="max-w-3xl mx-auto px-4 py-6">
+    <button
+      @click="goBack"
+      class="mb-4 text-xs text-gray-500 hover:text-gray-300 cursor-pointer flex items-center gap-1 transition-colors"
+    >
+      ← Back to Faction Select
+    </button>
+
     <header class="mb-6">
       <h1 class="text-2xl font-bold text-white">⚔️ Warcraft III Unit Encyclopedia</h1>
       <p class="text-sm text-gray-400">{{ filteredUnits.length }} units found</p>

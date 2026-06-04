@@ -7,6 +7,11 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      name: 'race-select',
+      component: () => import('@/views/RaceSelectView.vue'),
+    },
+    {
+      path: '/units',
       name: 'home',
       component: HomeView,
     },
