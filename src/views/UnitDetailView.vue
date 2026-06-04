@@ -6,14 +6,9 @@ import { units } from '@/data/units'
 const route = useRoute()
 const router = useRouter()
 
-// useRoute gives us access to the URL params - this reads the :id from /unit/:id
-const unit = computed(() => {
-  return units.find((u) => u.id === route.params.id)
-})
+const unit = computed(() => units.find((u) => u.id === route.params.id))
 
-const goBack = () => {
-  router.push({ name: 'home' })
-}
+const goBack = () => router.push({ name: 'home' })
 
 const raceColour = (race: string) => {
   const colours: Record<string, string> = {
@@ -28,121 +23,54 @@ const raceColour = (race: string) => {
 </script>
 
 <template>
-  <div class="detail-page">
-    <button class="back-btn" @click="goBack">← Back</button>
+  <div class="max-w-3xl mx-auto p-8 min-h-screen">
+    <button
+      @click="goBack"
+      class="mb-8 px-4 py-2 rounded border border-gray-600 text-gray-400 text-sm cursor-pointer hover:bg-[#1e1e2e] block"
+    >
+      ← Back
+    </button>
 
-    <div v-if="unit" class="unit-detail">
-      <div class="unit-header" :style="{ borderLeftColor: raceColour(unit.race) }">
-        <h1>{{ unit.name }}</h1>
-        <span class="race-tag">{{ unit.race }}</span>
-        <span class="type-tag">{{ unit.type }}</span>
+    <div v-if="unit">
+      <div class="pl-5 mb-8 border-l-4" :style="{ borderColor: raceColour(unit.race) }">
+        <h1 class="text-3xl font-bold text-white mb-3">{{ unit.name }}</h1>
+        <div class="flex gap-2">
+          <span class="text-xs px-3 py-1 rounded-full bg-[#2a2a3e] text-gray-400">{{
+            unit.race
+          }}</span>
+          <span class="text-xs px-3 py-1 rounded-full bg-[#2a2a3e] text-gray-400">{{
+            unit.type
+          }}</span>
+        </div>
       </div>
 
-      <p class="description">{{ unit.description }}</p>
+      <p class="text-gray-400 text-sm leading-relaxed mb-10">{{ unit.description }}</p>
 
-      <h2>Stats</h2>
-      <div class="stats-grid">
-        <div class="stat-block">
-          <span class="stat-label">❤️ Hit Points</span>
-          <span class="stat-value">{{ unit.hp }}</span>
+      <h2 class="text-xs uppercase tracking-widest text-gray-500 mb-4">Stats</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+        <div class="bg-[#1e1e2e] border border-gray-700 rounded-lg p-4">
+          <p class="text-xs text-gray-500 mb-2">❤️ Hit Points</p>
+          <p class="text-2xl font-bold text-white">{{ unit.hp }}</p>
         </div>
-        <div class="stat-block">
-          <span class="stat-label">⚔️ Damage</span>
-          <span class="stat-value">{{ unit.damage }}</span>
+        <div class="bg-[#1e1e2e] border border-gray-700 rounded-lg p-4">
+          <p class="text-xs text-gray-500 mb-2">⚔️ Damage</p>
+          <p class="text-2xl font-bold text-white">{{ unit.damage }}</p>
         </div>
-        <div class="stat-block">
-          <span class="stat-label">🛡️ Armour</span>
-          <span class="stat-value">{{ unit.armor }}</span>
+        <div class="bg-[#1e1e2e] border border-gray-700 rounded-lg p-4">
+          <p class="text-xs text-gray-500 mb-2">🛡️ Armour</p>
+          <p class="text-2xl font-bold text-white">{{ unit.armor }}</p>
         </div>
-        <div class="stat-block">
-          <span class="stat-label">🪙 Gold Cost</span>
-          <span class="stat-value">{{ unit.cost.gold }}</span>
+        <div class="bg-[#1e1e2e] border border-gray-700 rounded-lg p-4">
+          <p class="text-xs text-gray-500 mb-2">🪙 Gold Cost</p>
+          <p class="text-2xl font-bold text-white">{{ unit.cost.gold }}</p>
         </div>
-        <div class="stat-block">
-          <span class="stat-label">🪵 Lumber Cost</span>
-          <span class="stat-value">{{ unit.cost.lumber }}</span>
+        <div class="bg-[#1e1e2e] border border-gray-700 rounded-lg p-4">
+          <p class="text-xs text-gray-500 mb-2">🪵 Lumber Cost</p>
+          <p class="text-2xl font-bold text-white">{{ unit.cost.lumber }}</p>
         </div>
       </div>
     </div>
 
-    <div v-else>
-      <p>Unit not found.</p>
-    </div>
+    <div v-else class="text-gray-400">Unit not found.</div>
   </div>
 </template>
-
-<style scoped>
-.detail-page {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 24px 16px;
-}
-.back-btn {
-  background: none;
-  border: 1px solid #444;
-  color: #ccc;
-  padding: 6px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-bottom: 24px;
-  font-size: 14px;
-}
-.back-btn:hover {
-  background: #1e1e2e;
-}
-.unit-header {
-  border-left: 5px solid #4a90d9;
-  padding-left: 16px;
-  margin-bottom: 16px;
-}
-h1 {
-  font-size: 28px;
-  margin-bottom: 8px;
-}
-.race-tag,
-.type-tag {
-  display: inline-block;
-  font-size: 12px;
-  padding: 2px 10px;
-  border-radius: 20px;
-  background: #2a2a3e;
-  color: #ccc;
-  margin-right: 6px;
-}
-.description {
-  color: #aaa;
-  font-size: 15px;
-  margin-bottom: 24px;
-  line-height: 1.6;
-}
-h2 {
-  font-size: 16px;
-  color: #888;
-  margin-bottom: 12px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 12px;
-}
-.stat-block {
-  background: #1e1e2e;
-  border: 1px solid #333;
-  border-radius: 8px;
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.stat-label {
-  font-size: 12px;
-  color: #888;
-}
-.stat-value {
-  font-size: 22px;
-  font-weight: bold;
-  color: #fff;
-}
-</style>
