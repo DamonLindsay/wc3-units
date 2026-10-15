@@ -1,48 +1,45 @@
-# wc3-units
+# Warcraft III Unit Encyclopaedia
 
-This template should help get you started developing with Vue 3 in Vite.
+A Vue 3 reference app for Warcraft III units and heroes. Pick a race, browse and filter its units, and open any unit for full stats, lore, strengths and weaknesses.
 
-## Recommended IDE Setup
+## Features
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- **Race select screen** with themed cards, and filters synced to the URL so views can be shared and bookmarked
+- **20 units and heroes** across the races, with icons, stats and race colour coding
+- **Filters** for unit type and heroes
+- **Unit detail pages** with stats, lore, strengths and weaknesses, a Hero badge, and a typewriter effect for unit quotes
+- **Reusable components** (`UnitCard`, `StatCard`) using typed props and emits
 
-## Recommended Browser Setup
+## How it was built
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+Each feature was developed on its own branch and merged through a pull request (see the closed PRs), to practise a team-style Git workflow.
 
-## Type Support for `.vue` Imports in TS
+## Tech stack
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+Vue 3 (Composition API, `<script setup>`), TypeScript, Vue Router, Tailwind CSS, Vite, ESLint, Oxlint, Prettier
 
-## Customize configuration
+## Getting started
 
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
+```bash
 npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+Other scripts: `npm run build` (type-check and build), `npm run lint`, `npm run format`.
 
-```sh
-npm run build
+## Project structure
+
+```
+src/
+├── data/units.ts          # Unit data and Unit interface
+├── components/
+│   ├── UnitCard.vue
+│   └── StatCard.vue
+├── views/
+│   ├── RaceSelectView.vue
+│   ├── HomeView.vue
+│   └── UnitDetailView.vue
+└── router/index.ts
 ```
 
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+Unit icons are from the Warcraft Wiki. Warcraft III is a trademark of Blizzard Entertainment; this is a non-commercial fan project.
